@@ -1,3 +1,2 @@
 # Removes "ready" file
-
-rm /shared/scripts/controller/controller.ready
+rm /shared/controller.ready
