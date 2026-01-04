@@ -19,7 +19,7 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         
-        if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
+        if username in ADMIN_CREDS and ADMIN_CREDS[username] == password:
             session["user"] = username
             flash("Login successful!", "success")
             return redirect(url_for("dashboard"))
