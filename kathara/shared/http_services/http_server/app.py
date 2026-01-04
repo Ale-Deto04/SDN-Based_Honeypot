@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 app = Flask(__name__)
 app.secret_key = "secretkey123"
 
-ADMIN_CREDS = {"admin": "password123"}
+ADMIN_CREDS = {"admin": "admin"}
 
 @app.route("/")
 def home():
