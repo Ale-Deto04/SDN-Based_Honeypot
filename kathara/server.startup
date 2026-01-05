@@ -9,3 +9,7 @@ ip route add default via "$GATEWAY"
 
 # Initialization
 /shared/scripts/init.sh
+
+# Service startup
+cd /shared/http_services/http_server
+python3 app.py > server.log 2>&1 &

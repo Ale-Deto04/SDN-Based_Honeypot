@@ -9,3 +9,7 @@ ip route add default via "$GATEWAY"
 
 # Initialization
 /shared/scripts/init.sh
+
+# Service startup
+cd /shared/http_services/http_hpot
+python3 app.py > hpot.log 2>&1 &
