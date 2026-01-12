@@ -1,9 +1,82 @@
 # SDN-Based Honeypot
+
+This project was developed as part of the _"Next Generation Network"_ course. It implements a **security honeypot** architecture based on **Software-Defined Networking (SDN)** over a Kathará-emulated enterprise network.
+
+The scenario model a company environment composed of:
+- a legitimate server exposing HTTP services
+- a honeypot that mimics the server
+- hosts representing both authorized and unauthorized users
+
+The SDN controller dynamically identifies untrusted access attempts and, instead of blocking the source IP, leverages SDN capabilities to transparently redirect malicious hosts to the honeypot.
+Thanks to packet manipulation at the network layer, the malicious host remains unaware of the redirection.
+
 ---
-This project is part of the "Next Generation Network" course. It implements a security honeypot using SDN over a Kathará network that emulates a company environment, consisting of a server exposing HTTP services, a honeypot, and hosts representing both authorized and unauthorized users. The SDN controller identifies untrusted access requests and, instead of blocking the IP, redirects them to the honeypot. The controller manages IPs in such a way that the malicious host is unaware of the redirection.
 
 ## Project description
-TODO
+The project consists of an active laboratory environment in which the network of a fictitious company, HoneyMoon INC., is deployed using Kathará. Clients can interact with the infrastructure by accessing services hosted within the network.
+The architecture follows a client–server model, with traffic fully managed by an SDN-enabled switch under the control of a centralized controller.
+
+### Network Topology
+
+The network is composed of five hosts, each belonging to a different subnet, interconnected through an Open vSwitch and managed by an SDN controller (Ryu).
+
+```mermaid
+graph TD
+    %% Controller
+    Ryu["SDN Controller<br>20.0.0.1/24"]:::controller
+
+    %% Switch
+    Switch["SDN Switch<br>(OpenFlow)"]:::switch
+
+    %% Hosts
+    Server["Server<br>10.0.0.1/24"]:::server
+    Honeypot["Honeypot<br>11.0.0.1/24"]:::honeypot
+    Client1["Client 1<br>10.0.1.1/24"]:::client
+    Client2["Client 2<br>10.0.2.1/24"]:::client
+
+    %% Control plane
+    Ryu == Control Plane (OpenFlow) ==> Switch
+
+    %% Data plane
+    Switch -- "10.0.0.0/24" --> Server
+    Switch -. "11.0.0.0/24" .-> Honeypot
+    Switch -- "10.0.1.0/24" --> Client1
+    Switch -- "10.0.2.0/24" --> Client2
+
+    %% Styles
+    classDef controller fill:#e3f2fd,stroke:#1565c0,stroke-width:2px;
+    classDef switch fill:#ede7f6,stroke:#5e35b1,stroke-width:2px;
+    classDef server fill:#e8f5e9,stroke:#2e7d32;
+    classDef honeypot fill:#fff3e0,stroke:#ef6c00,stroke-dasharray:5 5;
+    classDef client fill:#f5f5f5,stroke:#424242;
+```
+
+### Trust Model
+
+Not all the subnets in the company have the same privileges:
+- Trusted subnet: `10.0.1.0/24` (Client 1)
+- Untrusted subnet: `10.0.2.0/24` (Client 1)
+
+The server exposes an HTTP service that includes an admin-only area containing private information.
+Hosts belonging to trusted networks are allowed to access such resources, whereas traffic originating from untrusted networks is closely monitored.
+
+### SDN Control Logic
+
+All packets flow through the SDN switch which operates under the control of the Ryu controller, acting as the logical brain of the network. The controller
+1. Handles incoming packets according to SDN principles
+2. Performs forwarding decisions based on source subnet, MAC address, and ingress port
+3. Installs flow rules on the switch using `FLOW_MOD` messages for subsequent packets.
+
+The controller follows a self-learning approach: it is initially aware only of the involved subnets (defined in `NETCONFIG.py` file) while output ports and IP-to-MAC associations are dynamically learned during operation.
+
+### HoneyPot implementation
+
+The honeypot is deployed as a separate host within the network and runs a service that closely replicates the behavior of the legitimate server, while providing fake and non-sensitive information. Its purpose is to deceive malicious users by offering an environment that appears genuine, thereby allowing their activity to be observed without exposing real assets.
+
+Once the SDN controller has learned the network topology, it continuously monitors traffic originating from untrusted subnets. When packets contain application-layer payloads, the controller performs **Deep Packet Inspection (DPI)** to detect attempts to access protected resources. Upon identifying a suspicious or unauthorized access attempt, the controller exploits SDN capabilities to transparently redirect the traffic toward the honeypot.
+
+This redirection is achieved by installing flow rules on the switch that dynamically modifying packet's L3-headers, ensuring that the malicious client remains unaware of the redirection. From the attacker’s perspective, the communication continues normally, while in reality it is being handled by the honeypot. This approach allows the system to both protect the legitimate server and gather valuable information about malicious behavior.
+
 ---
 
 ## Repository Structure
