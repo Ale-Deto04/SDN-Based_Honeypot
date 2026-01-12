@@ -54,8 +54,8 @@ graph TD
 ### Trust Model
 
 Not all the subnets in the company have the same privileges:
-- Trusted subnet: `10.0.1.0/24` (Client 1)
-- Untrusted subnet: `10.0.2.0/24` (Client 1)
+- Trusted subnet: `10.0.1.0/24` --> `Client 1`
+- Untrusted subnet: `10.0.2.0/24` --> `Client 2`
 
 The server exposes an HTTP service that includes an admin-only area containing private information.
 Hosts belonging to trusted networks are allowed to access such resources, whereas traffic originating from untrusted networks is closely monitored.
@@ -64,7 +64,7 @@ Hosts belonging to trusted networks are allowed to access such resources, wherea
 
 All packets flow through the SDN switch which operates under the control of the Ryu controller, acting as the logical brain of the network. The controller
 1. Handles incoming packets according to SDN principles
-2. Performs forwarding decisions based on source subnet, MAC address, and ingress port
+2. Implements routing functions for inter-network communication
 3. Installs flow rules on the switch using `FLOW_MOD` messages for subsequent packets.
 
 The controller follows a self-learning approach: it is initially aware only of the involved subnets (defined in `NETCONFIG.py` file) while output ports and IP-to-MAC associations are dynamically learned during operation.
