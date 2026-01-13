@@ -19,7 +19,7 @@ The architecture follows a **client–server** model, with traffic fully managed
 
 ### Network Topology
 
-The network is composed of five hosts, each belonging to a different subnet, interconnected through an Open vSwitch and managed by an SDN controller (`Ryu`). The network topology is shown following schema:
+The network is composed of five hosts, each belonging to a different subnet, interconnected through an Open vSwitch and managed by an SDN controller (Ryu). The network topology is shown following schema:
 
 ```mermaid
 graph TD
@@ -63,7 +63,7 @@ Hosts belonging to trusted networks are allowed to access such resources, wherea
 
 ### SDN Control Logic
 
-All packets flow through the SDN switch which operates under the control of the `Ryu` controller, acting as the **logical brain** of the network. The controller
+All packets flow through the SDN switch which operates under the control of the Ryu controller, acting as the **logical brain** of the network. The controller
 1. Handles **incoming packets** (`PACKET_IN`) according to SDN principles
 2. Implements **routing functions** for inter-network communication
 3. Installs **flow rules** on the switch using `FLOW_MOD` messages for subsequent packets.
@@ -148,7 +148,7 @@ git clone https://github.com/Ale-Deto04/SDN-based_honeypot.git
 cd SDN-based_honeypot/
 ```
 
-2. Run the build.sh script to build the Docker images used in the lab. The script automatically downloads all required dependencies and installs the HTTP service scripts inside the containers.
+2. Run the `build.sh` script to build the Docker images used in the lab. The script automatically downloads all required dependencies and installs the HTTP service scripts inside the containers.
 ```bash
 ./build.sh
 ```
