@@ -168,14 +168,17 @@ Kathara will automatically deploy the virtual machines, opening **three terminal
 
 ### The Lab
 
-Open your browser and navigate to the `controller` dashboard by digiting the url `http://localhost:8080/dahsboard`. The web app for the controller shoudl appear. You can navigate through the three sections:
+Open your browser and navigate to the `controller` dashboard by typing the URL `http://localhost:8080/dahsboard`. The web app for the controller should appear. From here, you can navigate through the three sections:
 
-1. Home: contains the server and honeypot status
-2. Console: propose the controller terminal
-3. Devices: show the devices connected to the switch
+1. **Home**: displays the status of the server and the honeypot
+2. **Console**: provides access to the controller terminal
+3. **Devices**: shows the devices currently connected to the switch
 
-You may notice that it's quite empty, that's beacause the SDN controller is not running. Go to the Home page and click on the green `Launch Controller` button.
-Console and devices should start to populate and status should go on "on". Wait until the VMs are properly started.
+At first, the dashboard may appear mostly empty. This is because the SDN controller is not running yet.  
+Go to the **Home** page and click the green **Launch Controller** button.
+
+Once the controller starts, the **Console** and **Devices** sections will begin to populate, and the status will switch to **ON**.  
+Wait until all virtual machines are fully initialized before proceeding; this process may take a few seconds.
 
 ---
 
