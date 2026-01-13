@@ -273,6 +273,6 @@ ls -l
 
 ## Technologies Involved
 
-1. [**Kathará**](https://www.kathara.org/) (and [**Docker**](https://www.docker.com/) -- used to simulate the network and deploy virtual machines
-2. [**Ryu**](https://ryu.readthedocs.io/en/latest/) -- SDN controller managing network flows and packet handling
-3. [**Flask**](https://flask.palletsprojects.com/en/stable/) and [**Python-SocketIO**](https://python-socketio.readthedocs.io/en/stable/) -- used to implement the web services on the server, the honeypot and the controller
+1. [**Kathará**](https://www.kathara.org/) (and [**Docker**](https://www.docker.com/)) - used to simulate the network and deploy virtual machines
+2. [**Ryu**](https://ryu.readthedocs.io/en/latest/) - SDN controller managing network flows and packet handling
+3. [**Flask**](https://flask.palletsprojects.com/en/stable/) and [**Python-SocketIO**](https://python-socketio.readthedocs.io/en/stable/) - used to implement the web services on the server, the honeypot and the controller
