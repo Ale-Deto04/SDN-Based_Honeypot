@@ -144,7 +144,7 @@ Although Kathará is designed to work on multiple operating systems, this projec
 
 1. Clone the repository and navigate to the project directory:
 ```bash
-git clone https://github.com/Ale-Deto04/SDN-based_honeypot.git
+git clone https://github.com/Ale-Deto04/SDN-Based_Honeypot.git
 cd SDN-based_honeypot/
 ```
 
