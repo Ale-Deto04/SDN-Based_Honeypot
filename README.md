@@ -145,7 +145,7 @@ git clone https://github.com/Ale-Deto04/SDN-based_honeypot.git
 cd SDN-based_honeypot/
 ```
 
-2. Launch the `build.sh` script in order to build the Docker images deployed in the lab. It automatically downloads dependencies and import HTTP service scripts within the container
+2. Run the build.sh script to build the Docker images used in the lab. The script automatically downloads all required dependencies and installs the HTTP service scripts inside the containers.
 ```bash
 ./build.sh
 ```
@@ -153,18 +153,18 @@ cd SDN-based_honeypot/
 ### Project launch
 
 Navigate to the `Kathara` folder and start the lab.
-
 ```bash
 cd Kathara/
 kathara lstart
 ```
-Kathara will automatically deploy the VMs three terminals will appear, one for Host1 (`h1`), one for Host2 (`h2`) and one for the Honeypoy.
 
-Notice that kathara uses xTerm by default, I highly suggest to change the terminal emulator to a more confortable one. To launch Kathara with a custom terminal use the `--terminal-emu` flag fllowed by the <path to terminal> e.g.:
+Kathara will automatically deploy the virtual machines, opening **three terminal windows**: one for Client1 (`h1`), one for Client2 (`h2`) and one for the Honeypoy. The remaining terminals (controller, switch and server) are **not required for this project**.
 
-```bash
-kathara lstart --terminal-emu /usr/bin/gnome-terminal
-```
+> [!NOTE]
+> By default, Kathará uses **xterm** as the terminal emulator. It is highly suggested to switch to a more comfortable alternative. To launch Kathará with a custom terminal emulator, use the `--terminal-emu` flag followed by the path to the desired terminal, for example:
+> ```bash
+> kathara lstart --terminal-emu /usr/bin/gnome-terminal
+> ```
 
 ### The Lab
 
