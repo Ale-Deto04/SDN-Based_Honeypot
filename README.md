@@ -13,7 +13,7 @@ Thanks to the packet manipulation at the network layer, the malicious host remai
 ---
 
 ## Project description
-The project consists of an active laboratory environment in which the network of a fictitious company, called _HoneyMoon INC_, is deployed using Kathará. Clients can interact with the infrastructure by accessing services hosted within the network.
+The project consists of an active laboratory environment in which the network of a fictitious company, called _HoneyMoon Inc_, is deployed using Kathará. Clients can interact with the infrastructure by accessing services hosted within the network.
 
 The architecture follows a **client–server** model, with traffic fully managed by an SDN-enabled switch under the control of a centralized controller.
 
