@@ -173,7 +173,9 @@ Kathara will automatically deploy the virtual machines, opening **three terminal
 
 
 > [!TIP]
-> By default, Kathará uses **xterm** as the terminal emulator. It is highly suggested to switch to a more comfortable alternative. To launch Kathará with a custom terminal emulator, use the `--terminal-emu` flag followed by the path to the desired terminal, for example:
+> By default, Kathará uses **xterm** as the terminal emulator. It is highly suggested to switch to a more comfortable alternative.
+>
+> To launch Kathará with a custom terminal emulator, use the `--terminal-emu` flag followed by the path to the desired terminal, for example:
 > ```bash
 > kathara lstart --terminal-emu /usr/bin/gnome-terminal
 > ```
@@ -184,7 +186,7 @@ Kathara will automatically deploy the virtual machines, opening **three terminal
 
 ### Controller Dashboard
 
-Open your browser and navigate to the `controller` dashboard by typing the URL `http://localhost:8080/dashboard`. The web app for the controller should appear. From here, you can navigate through the three sections:
+Open your browser and navigate to the **controller dashboard** by typing the URL `http://localhost:8080/dashboard`. The web app for the controller should appear. From here, you can navigate through the three sections:
 
 1. **Home**: displays the status of the server and the honeypot
 2. **Console**: replicates to the controller terminal window
@@ -227,7 +229,7 @@ ping -c 1 honeymoon.com
 
 Both clients should be able to reach the server and receive a response.
 
-Each client is also equipped with `w3m` **CLI web browser**, which allows users to navigate web services directly from the terminal
+Each client is also equipped with `w3m` **CLI web browser**, which allows users to navigate web services directly from the terminal.
 
 On `h1`, visit the server's web service by typing:
 ```bash
@@ -243,7 +245,7 @@ Navigate to login page and submit the credentials `admin:admin`. Since Client 1 
 
 ### Threat detection
 
-On `h2` perform the same steps of Client 1 to visit the web server.
+On `h2`, perform the same steps of Client 1 to visit the web server.
 
 When you try to log in as admin or directly access `/login/dashboard`, the server will not respond, simulating a **connection loss**. On the controller dashboard, an alert badge will appear, indicating that an **untrusted device** is attempting to access private information.
 
@@ -269,6 +271,14 @@ ls -l
 > [!NOTE]
 > The **simulated connection loss** is a design choice. In practice, it is **not possible to transparently switch an active TCP connection** from one host to another, because TCP maintains state information such as sequence numbers and session data. > 
 > By simulating a simple connection drop, the client can establish a new connection with the honeypot without raising suspicion. This approach allows the controller to redirect traffic safely while maintaining the illusion of a continuous session.
+
+
+### Project shutdown
+
+Type the following command on your terminal to gracefully shutdown the lab.
+```bash
+kathara lclean
+```
 
 ---
 
