@@ -268,10 +268,17 @@ If malicious activity is detected, the controller **drops the packet** and insta
 
 This ensures that Client 2 remains unaware that it is communicating with the honeypot, as the IPs are modified midway by the switch.
 
-Meanwhile, the honeypot **records all communications** using `tcpflow`, allowing the captured traffic to be analyzed later for **security auditing**. To verify this, open the honeypot terminal, navigate to the `/flows` directory, and inspect the captured traffic.
+Meanwhile, the honeypot **records all communications** using `tcpflow`, allowing the captured traffic to be analyzed later for **security auditing**. To verify this, navigate to the `/flows` directory in the honeypot terminal, and inspect the captured traffic.
+
+On your terminal connect to the honeypot machine by typing:
+```bash
+kathara connect honeypot
+```
+Then navigate in the intended directory to list the captured payloads:
 ```bash
 cd /flows
 ls -l
+exit
 ```
 
 > [!NOTE]
