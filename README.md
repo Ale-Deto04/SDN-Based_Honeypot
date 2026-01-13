@@ -161,7 +161,7 @@ cd Kathara/
 kathara lstart
 ```
 
-Kathara will automatically deploy the virtual machines, opening **three terminal windows**: one for Client1 (`h1`), one for Client2 (`h2`) and one for the Honeypoy. The remaining terminals (controller, switch and server) are **not required for this project**.
+Kathara will automatically deploy the virtual machines, opening **three terminal windows**: one for Client1 (`h1`), one for Client2 (`h2`) and one for the honeypot. The remaining terminals (controller, switch and server) are **not required for this project**.
 
 > [!WARNING]
 > Each terminal should display a startup message.
