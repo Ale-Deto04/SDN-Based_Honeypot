@@ -268,10 +268,11 @@ ls -l
 > [!NOTE]
 > The **simulated connection loss** is a design choice. In practice, it is **not possible to transparently switch an active TCP connection** from one host to another, because TCP maintains state information such as sequence numbers and session data. > 
 > By simulating a simple connection drop, the client can establish a new connection with the honeypot without raising suspicion. This approach allows the controller to redirect traffic safely while maintaining the illusion of a continuous session.
+
 ---
 
-## Technologies involved
+## Technologies Involved
 
-1. Kathará (Docker) for network emulation
-2. Ryu for the SDN Controller
-3. Flask and SocketIO for HTTP Services
+1. [**Kathará**](https://www.kathara.org/) (and [**Docker**](https://www.docker.com/) -- used to simulate the network and deploy virtual machines
+2. [**Ryu**](https://ryu.readthedocs.io/en/latest/) -- SDN controller managing network flows and packet handling
+3. [**Flask**](https://flask.palletsprojects.com/en/stable/) and [**Python-SocketIO**](https://python-socketio.readthedocs.io/en/stable/) -- used to implement the web services on the server, the honeypot and the controller
