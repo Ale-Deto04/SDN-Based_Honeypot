@@ -232,7 +232,7 @@ ping -c 1 honeymoon.com
 
 Both clients should be able to reach the server and receive a response.
 
-Each client is also equipped with `w3m` **CLI web browser**, which allows users to navigate web services directly from the terminal.
+Each client is also equipped with the `w3m` **CLI web browser**, which allows users to navigate web services directly from the terminal.
 
 On `h1`, visit the server's web service by typing:
 ```bash
