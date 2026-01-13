@@ -8,7 +8,7 @@ The scenario model a company environment composed of:
 - Two **hosts** representing both authorized and unauthorized users
 
 The SDN controller dynamically **identifies untrusted access attempts** and, instead of blocking the source IP, leverages SDN capabilities to **redirect** the malicious hosts to the honeypot.
-Thanks to packet manipulation at the network layer, the malicious host remains **unaware** of the redirection.
+Thanks to the packet manipulation at the network layer, the malicious host remains **unaware** of the redirection.
 
 ---
 
