@@ -3,22 +3,22 @@
 This project was developed as part of the _"Next Generation Network"_ course. It implements a **security honeypot** architecture based on **Software-Defined Networking (SDN)** over a Kathará-emulated enterprise network.
 
 The scenario model a company environment composed of:
-- a legitimate server exposing HTTP services
-- a honeypot that mimics the server
-- hosts representing both authorized and unauthorized users
+- A legitimate **server** exposing HTTP services
+- A **honeypot** that mimics the server
+- Two **hosts** representing both authorized and unauthorized users
 
-The SDN controller dynamically identifies untrusted access attempts and, instead of blocking the source IP, leverages SDN capabilities to transparently redirect malicious hosts to the honeypot.
-Thanks to packet manipulation at the network layer, the malicious host remains unaware of the redirection.
+The SDN controller dynamically **identifies untrusted access attempts** and, instead of blocking the source IP, leverages SDN capabilities to **redirect** the malicious hosts to the honeypot.
+Thanks to packet manipulation at the network layer, the malicious host remains **unaware** of the redirection.
 
 ---
 
 ## Project description
-The project consists of an active laboratory environment in which the network of a fictitious company, HoneyMoon INC., is deployed using Kathará. Clients can interact with the infrastructure by accessing services hosted within the network.
-The architecture follows a client–server model, with traffic fully managed by an SDN-enabled switch under the control of a centralized controller.
+The project consists of an active laboratory environment in which the network of a fictitious company, called _HoneyMoon INC_, is deployed using Kathará. Clients can interact with the infrastructure by accessing services hosted within the network.
+The architecture follows a **client–server** model, with traffic fully managed by an SDN-enabled switch under the control of a centralized controller.
 
 ### Network Topology
 
-The network is composed of five hosts, each belonging to a different subnet, interconnected through an Open vSwitch and managed by an SDN controller (Ryu).
+The network is composed of five hosts, each belonging to a different subnet, interconnected through an Open vSwitch and managed by an SDN controller (`Ryu`). The network topology is shown following schema:
 
 ```mermaid
 graph TD
@@ -53,33 +53,35 @@ graph TD
 
 ### Trust Model
 
-Not all the subnets in the company have the same privileges:
-- Trusted subnet: `10.0.1.0/24` --> `Client 1`
-- Untrusted subnet: `10.0.2.0/24` --> `Client 2`
+The entire project is based on the concept that not all the subnets in the company have the same privileges:
+- **Trusted subnet**: `10.0.1.0/24` --> `Client 1`
+- **Untrusted subnet**: `10.0.2.0/24` --> `Client 2`
 
 The server exposes an HTTP service that includes an admin-only area containing private information.
 Hosts belonging to trusted networks are allowed to access such resources, whereas traffic originating from untrusted networks is closely monitored.
 
 ### SDN Control Logic
 
-All packets flow through the SDN switch which operates under the control of the Ryu controller, acting as the logical brain of the network. The controller
-1. Handles incoming packets according to SDN principles
-2. Implements routing functions for inter-network communication
-3. Installs flow rules on the switch using `FLOW_MOD` messages for subsequent packets.
+All packets flow through the SDN switch which operates under the control of the `Ryu` controller, acting as the **logical brain** of the network. The controller
+1. Handles **incoming packets** (`PACKET-IN`) according to SDN principles
+2. Implements **routing functions** for inter-network communication
+3. Installs **flow rules** on the switch using `FLOW_MOD` messages for subsequent packets.
 
-The controller follows a self-learning approach: it is initially aware only of the involved subnets (defined in `NETCONFIG.py` file) while output ports and IP-to-MAC associations are dynamically learned during operation.
+The controller follows a **self-learning** approach: it is initially aware only of the involved subnets (defined in `NETCONFIG.py` file) while output ports and IP-to-MAC associations are dynamically learned during operation.
 
 ### HoneyPot implementation
 
-The honeypot is deployed as a separate host within the network and runs a service that closely replicates the behavior of the legitimate server, while providing fake and non-sensitive information. Its purpose is to deceive malicious users by offering an environment that appears genuine, thereby allowing their activity to be observed without exposing real assets.
+The honeypot is deployed as a separate host within the network and runs a service that closely **replicates the behavior of the legitimate server**, while providing **fake and non-sensitive information**. Its purpose is to deceive malicious users by offering an environment that appears genuine, thereby allowing their activity to be observed without exposing real assets.
 
-Once the SDN controller has learned the network topology, it continuously monitors traffic originating from untrusted subnets. When packets contain application-layer payloads, the controller performs **Deep Packet Inspection (DPI)** to detect attempts to access protected resources. Upon identifying a suspicious or unauthorized access attempt, the controller exploits SDN capabilities to transparently redirect the traffic toward the honeypot.
+Once the SDN controller has learned the network topology, it continuously **monitors traffic** originating from untrusted subnets. When packets contain application-layer payloads, the controller performs **Deep Packet Inspection (DPI)** to detect attempts to access protected resources. Upon identifying a suspicious or unauthorized access attempt, the controller exploits SDN capabilities to redirect the traffic toward the honeypot.
 
-This redirection is achieved by installing flow rules on the switch that dynamically modifying packet's L3-headers, ensuring that the malicious client remains unaware of the redirection. From the attacker’s perspective, the communication continues normally, while in reality it is being handled by the honeypot. This approach allows the system to both protect the legitimate server and gather valuable information about malicious behavior.
+This redirection is achieved by installing flow rules on the switch that dynamically modifying packet's **L3-headers**, ensuring that the malicious client remains **unaware of the redirection**. From the attacker’s perspective the communication is established with the server, while in reality it is being handled by the honeypot. This approach allows the system to both protect the legitimate server and **gather valuable information** about malicious behavior.
 
 ---
 
 ## Repository Structure
+
+This repository is organized as follows:
 
 ```bash
 main
@@ -119,25 +121,31 @@ main
         └── templates
 ```
 
-- `/Dockerfiles`: contains containers images for the controller, servers and hosts
-- `/Kathara`: contains the Kathara's configuration files and che shared scripts
-- `/Services`: containts the HTTP Services of each vitual machine
+- `/Dockerfiles`: contains the container images for the controller, servers, and hosts
+- `/Kathara`: contains the Kathará configuration files and the shared scripts
+- `/Kathara/shared/`: contains the `init.sh` script for device initialization and the Python code for the Ryu controller
+- `/Services`: contains the HTTP services deployed on each virtual machine
+
 ---
 
 ## Usage
 
 ### Requirements
-- Kathara
+
+The project requires **Kathará** (and consequently **Docker**) for deployment.
+Please refer to the following [link](https://www.kathara.org/download.html) to access the Kathará download page and follow the installation and configuration instructions.
+
+Although Kathará is designed to work on multiple operating systems, this project has been **tested on a Linux-based distribution**. For this reason, the instructions provided below refer to a Linux environment, which is therefore **recommended**.
 
 ### Project setup
 
-1. Clone or download the repository the repository and navigate into it
+1. Clone the repository and navigate to the project directory:
 ```bash
-git clone `<url>`
+git clone https://github.com/Ale-Deto04/SDN-based_honeypot.git
 cd SDN-based_honeypot/
 ```
 
-2. Launch the `build.sh` script in order to build the Docker images deployed in the lab
+2. Launch the `build.sh` script in order to build the Docker images deployed in the lab. It automatically downloads dependencies and import HTTP service scripts within the container
 ```bash
 ./build.sh
 ```
@@ -168,3 +176,11 @@ Open your browser and navigate to the `controller` dashboard by digiting the url
 
 You may notice that it's quite empty, that's beacause the SDN controller is not running. Go to the Home page and click on the green `Launch Controller` button.
 Console and devices should start to populate and status should go on "on". Wait until the VMs are properly started.
+
+---
+
+## Technologies involved
+
+1. Kathará (Docker) for network emulation
+2. Ryu for the SDN Controller
+3. Flask and SocketIO for HTTP Services
