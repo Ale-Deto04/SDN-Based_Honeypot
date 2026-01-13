@@ -274,13 +274,13 @@ On your terminal connect to the honeypot by typing:
 ```bash
 kathara connect honeypot
 ```
-Then navigate in the intended directory to list the captured payloads:
+Then navigate the intended directory to list the captured payloads:
 ```bash
 cd /flows
 ls -l
 ```
 
-Remember to exit the honeypot terminal to return to your machine's terminal.
+Once you have finished, remember to exit the honeypot to return to your machine's terminal.
 ```bash
 exit
 ```
