@@ -191,7 +191,7 @@ Open your browser and navigate to the **controller dashboard** by typing the URL
 
 1. **Home**: displays the status of the server and the honeypot
 2. **Console**: replicates to the controller terminal window
-3. **Devices**: shows the devices currently connected to the switch
+3. **Devices**: shows the network configuration and the devices detected by the controller
 
 At first, the dashboard may appear mostly empty. This is because the SDN controller is not running yet.  
 Go to the **Home** page and click the green **Launch Controller** button.
