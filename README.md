@@ -150,6 +150,7 @@ cd SDN-based_honeypot/
 
 2. Run the `build.sh` script to build the Docker images used in the lab. The script automatically downloads all required dependencies and installs the HTTP service scripts inside the containers.
 ```bash
+chmod +x build.sh
 ./build.sh
 ```
 
