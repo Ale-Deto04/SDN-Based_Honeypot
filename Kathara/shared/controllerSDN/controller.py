@@ -27,7 +27,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         self.trusted_ips = {}   # IP -> LoT association
         self.ip_to_mac = {}     # IP -> MAC association
 
-        # Parse NET_CONFIG
+        # Parse NETCONFIG
         logging.info("Importing network configuration")
         
         for item in CONFIG["subnets"]:
