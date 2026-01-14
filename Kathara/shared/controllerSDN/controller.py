@@ -291,7 +291,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                                     logging.info("Drop RST Message", code = 900)
                                     match = parser.OFPMatch(eth_type = ether_types.ETH_TYPE_IP, 
                                                             ipv4_dst = ip_pkt.src, 
-                                                            ipv4_src = ip.pkt.dst,
+                                                            ipv4_src = dst,
                                                             ip_proto = in_proto.IPPROTO_TCP,
                                                             tcp_flags = 0x04)
                                     actions = []
