@@ -260,7 +260,7 @@ If you then retry to ping the server or access the sensitive web service using l
 
 ### Technical Overview
 
-As shown in the Console, the controller continuously **monitors the activity of Client 2** during all communications. Whenever a TCP packet is detected, the controller performs **Deep Packet Inspection** (**DPI**) to determine whether the client is attempting any malicious activity. In this project, the controller looks for the strings `["POST", "/login"]` or `/login/dashboard` in the HTTP request payload, which indicate an access attempt to restricted resources.
+As shown in the Console, the controller continuously **monitors the activity of Client 2** during all communications. Whenever a TCP packet is detected, the controller performs **Deep Packet Inspection** (**DPI**) to determine whether the client is attempting any malicious activity. In this project, the controller looks for the strings `["POST", "/login"]` or `["/login/dashboard"]` in the HTTP request payload, which indicate an access attempt to restricted resources.
 
 If malicious activity is detected, the controller **drops the packet** and installs a rule in the switch flow table to **rewrite the IP headers** of packets between Client 2 and the server in such a way that:
 - The **destination IP** of packets from Client 2 originally intended for the server is replaced with the **honeypot IP**
