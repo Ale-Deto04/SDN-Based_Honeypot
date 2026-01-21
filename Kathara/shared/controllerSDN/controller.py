@@ -293,7 +293,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                                                             ipv4_dst = ip_pkt.src, 
                                                             ipv4_src = dst,
                                                             ip_proto = in_proto.IPPROTO_TCP,
-                                                            tcp_flags = 0x04)
+                                                            tcp_flags = (0x04,0x04))
                                     actions = []
                                     if msg.buffer_id != ofproto.OFP_NO_BUFFER:
                                         self.add_flow(datapath, 1, match, actions, msg.buffer_id)
