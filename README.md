@@ -146,7 +146,7 @@ Although Kathará is designed to work on multiple operating systems, this projec
 1. Clone the repository and navigate to the project directory:
 ```bash
 git clone https://github.com/Ale-Deto04/SDN-Based_Honeypot.git
-cd SDN-based_honeypot/
+cd SDN-Based_Honeypot/
 ```
 
 2. Run the `build.sh` script to build the Docker images used in the lab. The script automatically downloads all required dependencies and installs the HTTP service scripts inside the containers.
