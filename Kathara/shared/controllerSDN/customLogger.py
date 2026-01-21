@@ -7,7 +7,7 @@ from datetime import datetime
 CONF_LEVEL_NUM = 25
 logging.addLevelName(CONF_LEVEL_NUM, "CONF")
 
-# Extract `code`
+# Extract "code"
 def _extract_code_and_log(logger_instance, level, msg, args, kwargs):
     
     code = kwargs.pop('code', 0)
@@ -20,14 +20,11 @@ def _extract_code_and_log(logger_instance, level, msg, args, kwargs):
     if logger_instance.isEnabledFor(level):
         logger_instance._log(level, msg, args, **kwargs)
 
-
-# Patch
-
-# Metodo per il livello CONF
+# CONF method
 def conf_method(self, msg, *args, **kwargs):
     _extract_code_and_log(self, CONF_LEVEL_NUM, msg, args, kwargs)
 
-# Metodi wrapper per i livelli standard (per intercettare 'code')
+# Wrapper methods
 def info_patch(self, msg, *args, **kwargs):
     _extract_code_and_log(self, logging.INFO, msg, args, kwargs)
 
