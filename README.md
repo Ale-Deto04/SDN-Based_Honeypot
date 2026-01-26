@@ -93,6 +93,7 @@ SDN-Based_Honeypot/
 │   ├── Dockerfile.host
 │   ├── Dockerfile.ryu
 │   └── Dockerfile.server
+├── Docs/
 ├── Images/
 ├── Kathara/
 │   ├── controller.shutdown
@@ -125,10 +126,13 @@ SDN-Based_Honeypot/
         └── templates/
 ```
 
-- `/Dockerfiles`: contains the container images for the controller, servers, and hosts
-- `/Kathara`: contains the Kathará configuration files and the shared scripts
+### Main folders
+
+- `/Dockerfiles/`: contains the container images for the controller, servers, and hosts
+- `/Kathara/`: contains the Kathará configuration files and the shared scripts
 - `/Kathara/shared/`: contains the `init.sh` script for device initialization and the Python code for the Ryu controller
-- `/Services`: contains the HTTP services deployed on each virtual machine
+- `/Services/`: contains the HTTP services deployed on each virtual machine
+- `/Docs/`: contains the project presentation
 
 ---
 
